@@ -4,16 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notes Webpage</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #1e1e1e;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+        textarea, input {
+            background-color: #333;
+            color: #ffffff;
+            border: 1px solid #555;
+            padding: 10px;
+            margin-bottom: 10px;
+            width: 300px;
+        }
+        button {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        label {
+            margin-bottom: 5px;
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <h1>Notes Webpage</h1>
-    <textarea id="noteContent" rows="10" cols="50"></textarea><br><br>
+    <textarea id="noteContent" rows="10" cols="50" placeholder="Type your notes here..."></textarea><br>
     <label for="fileName">File Name:</label>
-    <input type="text" id="fileName" placeholder="Enter file name"><br><br>
+    <input type="text" id="fileName" placeholder="Enter file name"><br>
     <label for="fileExtension">File Extension:</label>
-    <input type="text" id="fileExtension" placeholder="Enter file extension"><br><br>
+    <input type="text" id="fileExtension" placeholder="Enter file extension (e.g., txt)"><br>
     <button onclick="saveNote()">Save Note</button>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     <script>
         function saveNote() {
             var content = document.getElementById('noteContent').value;
@@ -22,6 +58,16 @@
 
             if (content.trim() === '') {
                 alert('Please enter some content for your note.');
+                return;
+            }
+
+            if (fileName.trim() === '') {
+                alert('Please enter a file name.');
+                return;
+            }
+
+            if (fileExtension.trim() === '') {
+                alert('Please enter a file extension.');
                 return;
             }
 
